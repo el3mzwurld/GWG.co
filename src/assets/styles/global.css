@@ -405,10 +405,6 @@ nav {
             padding-left: 10px;
             margin: 10px 0px;
             animation: scroll 15s linear infinite;
-            &:hover {
-              animation-play-state: paused;
-              overflow-x: auto;
-            }
           }
         }
         .top-sellers {
@@ -431,9 +427,6 @@ nav {
             padding-left: 10px;
             margin: 10px 0px;
             animation: scroll-reverse 15s linear infinite;
-            &:hover {
-              animation-play-state: paused;
-            }
           }
           .preview {
             img {
