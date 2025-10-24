@@ -1,0 +1,33 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  --main-color: #ffffff;
+  --container-bg: #f2f0f1;
+  --black: #000000;
+  --link-col: hsla(0, 1%, 17%, 0.458);
+}
+
+body {
+  margin: 0;
+  display: flex;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+@media (min-width: 320px) {
+  body {
+    width: 100%;
+    min-height: 100vh;
+  }
+  #root {
+    width: 100%;
+    min-height: 100vh;
+  }
+}
