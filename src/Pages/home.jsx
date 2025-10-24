@@ -13,13 +13,49 @@ import casual from "../assets/img/casual.png";
 import street from "../assets/img/street wear.png";
 import modern from "../assets/img/modern.png";
 import Footer from "../components/footer";
+import { useState, useEffect } from "react";
+import { FaSearch, FaShoppingCart, FaRegUserCircle } from "react-icons/fa";
+import {
+  BsLayoutSidebarInset,
+  BsLayoutSidebarInsetReverse,
+} from "react-icons/bs";
 function Home() {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [sideToggle, setSideToggle] = useState(false);
+  const [trayLength, setTrayLength] = useState(0);
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  const [toggleSearch, setToggleSearch] = useState(false);
+  const handleSearchToggle = () => {
+    setToggleSearch((prev) => {
+      return (prev = !prev);
+    });
+  };
+
+  const toggleSide = () => {
+    setSideToggle((prev) => !prev);
+  };
+
   return (
     <div className="home">
       <header>
         <HeaderCta />
         <div className="header-nav">
-          <div className="mob-toggle"></div>
+          <div className="mob-toggle">
+            {windowWidth < 520 && sideToggle ? (
+              <BsLayoutSidebarInset
+                size={25}
+                onClick={toggleSide}
+              ></BsLayoutSidebarInset>
+            ) : (
+              <BsLayoutSidebarInsetReverse size={25} onClick={toggleSide} />
+            )}
+          </div>
           <div className="title">
             <p>
               <span>GWG</span>.CO
@@ -27,8 +63,20 @@ function Home() {
           </div>
           <nav></nav>
           <div className="ico">
-            <div className="cart"></div>
-            <div className="profile"></div>
+            <div className="search">
+              <FaSearch size={20} onClick={handleSearchToggle} />
+              <input
+                type="text"
+                placeholder="Product name or category..."
+                aria-label="Text-box"
+                className={`search-box ${toggleSearch ? "show" : ""}`}
+              />
+            </div>
+            <div className="cart">
+              <FaShoppingCart size={20} color="gray" />
+              <span>{trayLength}</span>
+            </div>
+            <FaRegUserCircle size={20} />
           </div>
         </div>
       </header>
@@ -229,3 +277,5 @@ function Home() {
 }
 
 export default Home;
+
+//
