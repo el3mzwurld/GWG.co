@@ -61,7 +61,7 @@ header {
   .title {
     p {
       span {
-        color: #808080b5;
+        color: #395439;
       }
     }
   }
@@ -626,7 +626,7 @@ nav {
                   font-size: 25px;
 
                   span {
-                    color: rgb(57, 84, 57);
+                    color: #395439;
                   }
                 }
                 .logo-txt {
