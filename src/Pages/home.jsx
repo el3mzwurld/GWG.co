@@ -21,7 +21,9 @@ function Home() {
         <div className="header-nav">
           <div className="mob-toggle"></div>
           <div className="title">
-            <p>GWG.CO</p>
+            <p>
+              <span>GWG</span>.CO
+            </p>
           </div>
           <nav></nav>
           <div className="ico">
