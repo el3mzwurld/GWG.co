@@ -15,6 +15,7 @@ import modern from "../assets/img/modern.png";
 import Footer from "../components/footer";
 import { useState, useEffect } from "react";
 import { FaSearch, FaShoppingCart, FaRegUserCircle } from "react-icons/fa";
+import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 import {
   BsLayoutSidebarInset,
   BsLayoutSidebarInsetReverse,
@@ -23,6 +24,7 @@ function Home() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [sideToggle, setSideToggle] = useState(false);
   const [trayLength, setTrayLength] = useState(0);
+  const [dropDownShow, setDropDownShow] = useState(false);
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
 
@@ -41,42 +43,94 @@ function Home() {
     setSideToggle((prev) => !prev);
   };
 
+  const handleDropDown = () => {
+    setDropDownShow((prev) => !prev);
+  };
   return (
     <div className="home">
       <header>
         <HeaderCta />
         <div className="header-nav">
-          <div className="mob-toggle">
-            {windowWidth < 520 && sideToggle ? (
-              <BsLayoutSidebarInset
-                size={25}
-                onClick={toggleSide}
-              ></BsLayoutSidebarInset>
-            ) : (
-              <BsLayoutSidebarInsetReverse size={25} onClick={toggleSide} />
-            )}
-          </div>
+          {windowWidth <= 519 && (
+            <div className="mob-toggle">
+              {windowWidth <= 519 && sideToggle ? (
+                <BsLayoutSidebarInset
+                  size={25}
+                  onClick={toggleSide}
+                ></BsLayoutSidebarInset>
+              ) : (
+                <BsLayoutSidebarInsetReverse size={25} onClick={toggleSide} />
+              )}
+            </div>
+          )}
           <div className="title">
             <p>
               <span>GWG</span>.CO
             </p>
           </div>
-          <nav></nav>
+          {windowWidth > 1023 && (
+            <nav>
+              {" "}
+              <ul>
+                <li>
+                  <span onClick={handleDropDown}>Shop</span>
+                  {dropDownShow ? (
+                    <RiArrowDropUpLine
+                      size={20}
+                      fontWeight={400}
+                      color="gray"
+                    />
+                  ) : (
+                    <RiArrowDropDownLine size={20} color="gray" />
+                  )}
+                  <ul className={`dropdown ${dropDownShow ? "show" : ""}`}>
+                    <li>For Men</li>
+                    <li>For Women</li>
+                  </ul>
+                </li>
+                <li>On Sale</li>
+                <li>New Arrivals</li>
+                <li>Brands</li>
+              </ul>{" "}
+            </nav>
+          )}
           <div className="ico">
             <div className="search">
-              <FaSearch size={20} onClick={handleSearchToggle} />
+              {windowWidth < 520 && (
+                <FaSearch size={20} color="gray" onClick={handleSearchToggle} />
+              )}
+              {windowWidth >= 520 && windowWidth <= 1023 && (
+                <FaSearch size={15} color="gray" onClick={handleSearchToggle} />
+              )}
+              {windowWidth >= 1024 && (
+                <FaSearch size={15} color="gray" onClick={handleSearchToggle} />
+              )}
+
               <input
                 type="text"
-                placeholder="Product name or category..."
+                placeholder="Search for Products..."
                 aria-label="Text-box"
                 className={`search-box ${toggleSearch ? "show" : ""}`}
               />
             </div>
+            {/* FaShoppingCart */}
             <div className="cart">
-              <FaShoppingCart size={20} color="gray" />
+              {windowWidth < 520 && <FaShoppingCart size={20} color="gray" />}
+              {windowWidth >= 520 && windowWidth <= 1023 && (
+                <FaShoppingCart size={20} color="#395439" />
+              )}{" "}
+              {windowWidth > 1023 && (
+                <FaShoppingCart size={20} color="#395439" />
+              )}
               <span>{trayLength}</span>
             </div>
-            <FaRegUserCircle size={20} />
+            {windowWidth < 520 && <FaRegUserCircle size={20} color="gray" />}
+            {windowWidth > 520 && windowWidth <= 1023 && (
+              <FaRegUserCircle size={25} color="#395439" />
+            )}
+            {windowWidth > 1023 && (
+              <FaRegUserCircle size={25} color="#395439" />
+            )}
           </div>
         </div>
       </header>
@@ -115,23 +169,22 @@ function Home() {
               <img src={star} alt="" className="star" />
               <img src={star} alt="" className="star" />
             </div>
-
-            <div className="partners">
-              <div className="frame">
-                <img src={versace} alt="" />
-              </div>
-              <div className="frame">
-                <img src={zara} alt="" />
-              </div>{" "}
-              <div className="frame">
-                <img src={gucci} alt="" />
-              </div>{" "}
-              <div className="frame">
-                <img src={prada} alt="" />
-              </div>{" "}
-              <div className="frame">
-                <img src={ck} alt="" />
-              </div>
+          </div>
+          <div className="partners">
+            <div className="frame">
+              <img src={versace} alt="" />
+            </div>
+            <div className="frame">
+              <img src={zara} alt="" />
+            </div>{" "}
+            <div className="frame">
+              <img src={gucci} alt="" />
+            </div>{" "}
+            <div className="frame">
+              <img src={prada} alt="" />
+            </div>{" "}
+            <div className="frame">
+              <img src={ck} alt="" />
             </div>
           </div>
         </section>
@@ -173,22 +226,6 @@ function Home() {
                 discount=""
                 rating={4.5}
               />{" "}
-              <Card
-                name="New rules plain Tee"
-                prev_price="$45"
-                price="$20"
-                product={test}
-                discount=""
-                rating={4.5}
-              />{" "}
-              <Card
-                name="New rules plain Tee"
-                prev_price="$45"
-                price="$20"
-                product={test}
-                discount=""
-                rating={4.5}
-              />
             </div>
 
             <button className="btn">View All</button>
@@ -198,14 +235,6 @@ function Home() {
               <p>TOP SELLERS</p>
             </div>
             <div className="cards">
-              <Card
-                name="Kage WRLD DOM"
-                prev_price="40,000 NGN"
-                price="25,000 NGN"
-                discount="20%"
-                product={kage2}
-                rating={5}
-              />
               <Card
                 name="KAGE VIG BANDANA"
                 price="6,000 NGN"
@@ -249,7 +278,7 @@ function Home() {
                   <img src={casual} alt="" />
                 </div>
               </div>
-              <div className="frame">
+              <div className="frame" id="frame-2">
                 <span>
                   Modern <br /> Corporate
                 </span>
@@ -257,7 +286,7 @@ function Home() {
                   <img src={modern} alt="" />
                 </div>
               </div>{" "}
-              <div className="frame">
+              <div className="frame" id="frame-3">
                 <span>
                   Street <br /> Wear
                 </span>
