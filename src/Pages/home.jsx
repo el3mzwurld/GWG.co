@@ -13,6 +13,7 @@ import casual from "../assets/img/casual.png";
 import street from "../assets/img/street wear.png";
 import modern from "../assets/img/modern.png";
 import Footer from "../components/footer";
+import Bg from "../assets/img/Rectangle 4.png";
 import { useState, useEffect } from "react";
 import { FaSearch, FaShoppingCart, FaRegUserCircle } from "react-icons/fa";
 import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
@@ -168,6 +169,7 @@ function Home() {
             <div className="img">
               <img src={star} alt="" className="star" />
               <img src={star} alt="" className="star" />
+              {windowWidth > 1023 && <img src={Bg} alt="" className="img-bg" />}
             </div>
           </div>
           <div className="partners">
